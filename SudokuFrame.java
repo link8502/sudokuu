@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("serial")     //To avoid warnings
 public final class SudokuFrame extends JFrame {
 
     private final JPanel buttonSelectionPanel;
@@ -39,12 +39,12 @@ public final class SudokuFrame extends JFrame {
         this.setTitle("Sudoku");
         this.setMinimumSize(new Dimension(1024, 800));
 
-        JMenuBar menuBar = new JMenuBar();
-        JButton sixBySixGame = new JButton("6 By 6 Game");
+        JMenuBar menuBar = new JMenuBar();//About Menu
+        JButton sixBySixGame = new JButton("6 By 6 Game"); //6x6 Button
         sixBySixGame.addActionListener(new NewGameListener(SudokuPuzzleType.SIXBYSIX, 30));
-        JButton nineByNineGame = new JButton("9 By 9 Game");
+        JButton nineByNineGame = new JButton("9 By 9 Game"); //9x9 Button
         nineByNineGame.addActionListener(new NewGameListener(SudokuPuzzleType.NINEBYNINE, 26));
-        JButton twelveByTwelveGame = new JButton("12 By 12 Game");
+        JButton twelveByTwelveGame = new JButton("12 By 12 Game");//12x12 Button
         twelveByTwelveGame.addActionListener(new NewGameListener(SudokuPuzzleType.TWELVEBYTWELVE, 20));
         JButton help = new JButton("How to Play");
         JButton finish = new JButton("Finish");
@@ -78,7 +78,7 @@ public final class SudokuFrame extends JFrame {
         about.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(center, "Advance Sudoku Game");
+                JOptionPane.showMessageDialog(center, "Advance Sudoku Game"); 
             }
 
             @Override
@@ -117,8 +117,8 @@ public final class SudokuFrame extends JFrame {
         label.setFont(new Font(Font.DIALOG, Font.PLAIN, 16));
         timepanel.add(sixBySixGame);
         timepanel.add(nineByNineGame);
-        timepanel.add(twelveByTwelveGame);
-        timepanel.add(help);
+        timepanel.add(twelveByTwelveGame);          //Add buttons and menu in JPanel and JFrame
+        timepanel.add(help);                
         timepanel.add(finish);
         menuBar.add(about);
 
@@ -149,7 +149,7 @@ public final class SudokuFrame extends JFrame {
         buttonSelectionPanel.removeAll();
         for (String value : generatedPuzzle.getValidValues()) {
             JButton b = new JButton(value);
-            b.setPreferredSize(new Dimension(50, 30));
+            b.setPreferredSize(new Dimension(50, 30));                                 //Button Selection Size
             b.addActionListener(sPanel.new NumActionListener());
             buttonSelectionPanel.add(b);
         }

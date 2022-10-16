@@ -56,7 +56,7 @@ public class SudokuPanel extends JPanel {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {         //Using protected void to be accessed on the same class, subclasses, and different subclasses.
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(new Color(1.0f, 1.0f, 1.0f));
@@ -71,7 +71,7 @@ public class SudokuPanel extends JPanel {
 
         g2d.setColor(new Color(0.0f, 0.0f, 0.0f));
         for (int x = 0; x <= usedWidth; x += slotWidth) {
-            if ((x / slotWidth) % puzzle.getBoxWidth() == 0) {
+            if ((x / slotWidth) % puzzle.getBoxWidth() == 0) {      //This will paint the y axis grid
                 g2d.setStroke(new BasicStroke(2));
                 g2d.drawLine(x, 0, x, usedHeight);
             } else {
@@ -79,19 +79,19 @@ public class SudokuPanel extends JPanel {
                 g2d.drawLine(x, 0, x, usedHeight);
             }
         }
-        //this will draw the right most line
-        //g2d.drawLine(usedWidth - 1, 0, usedWidth - 1,usedHeight);
+        
+        
         for (int y = 0; y <= usedHeight; y += slotHeight) {
             if ((y / slotHeight) % puzzle.getBoxHeight() == 0) {
                 g2d.setStroke(new BasicStroke(2));
-                g2d.drawLine(0, y, usedWidth, y);
+                g2d.drawLine(0, y, usedWidth, y);                   //This will paint the x axis grid
             } else {
                 g2d.setStroke(new BasicStroke(1));
                 g2d.drawLine(0, y, usedWidth, y);
             }
         }
-        //this will draw the bottom line
-        //g2d.drawLine(0, usedHeight - 1, usedWidth, usedHeight - 1);
+        
+        
 
         Font f = new Font("Times New Roman", Font.PLAIN, fontSize);
         g2d.setFont(f);

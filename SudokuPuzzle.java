@@ -2,9 +2,8 @@ package sudokuframe;
 
 
 public class SudokuPuzzle {
-
+    //This class determines if the slot is mutable
 	protected String [][] board;
-	// Table to determine if a slot is mutable
 	protected boolean [][] mutable;
 	private final int ROWS;
 	private final int COLUMNS;
