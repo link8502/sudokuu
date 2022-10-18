@@ -14,6 +14,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -49,7 +50,8 @@ public final class SudokuFrame extends JFrame {
         JButton help = new JButton("How to Play");
         JButton finish = new JButton("Finish");
         JPanel timepanel = new JPanel();
-
+        JButton exit = new JButton("Exit");
+        
         help.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,46 +64,36 @@ public final class SudokuFrame extends JFrame {
             }
         });
 
-        finish.addActionListener(new ActionListener() {
+        exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(center, "Thank you for Playing");
                 SudokuFrame.this.dispose();
             }
         });
+        
+        finish.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                Object [] options = {"Exit", "New Game"};
+                int x = JOptionPane.showOptionDialog(null, "Exit the Game or Want A New Game", "Finish", JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE, null, options, options[0]);
+                
+                if(x == 1){
+                SudokuFrame.this.rebuildInterface(SudokuPuzzleType.NINEBYNINE, 26);
+            }else{
+                SudokuFrame.this.dispose(); 
+                }
+                
+            }
+        });
+        
+
+        
         timepanel.setBackground(Color.decode("#AABFFF"));
         timepanel.setBorder(BorderFactory.createLineBorder(Color.black, 6, true));
         timepanel.setLayout(new GridLayout(4, 3, 0, 20));
 
-        JMenu about = new JMenu("About");
-
-        about.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(center, "Advance Sudoku Game"); 
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                JOptionPane.showMessageDialog(center, "Advance Sudoku Game");
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
 
         ActionListener action = new ActionListener() {
             @Override
@@ -120,8 +112,8 @@ public final class SudokuFrame extends JFrame {
         timepanel.add(twelveByTwelveGame);          //Add buttons and menu in JPanel and JFrame
         timepanel.add(help);                
         timepanel.add(finish);
-        menuBar.add(about);
-
+        
+        timepanel.add(exit);
         this.setJMenuBar(menuBar);
         timepanel.add(label);
         this.add(timepanel, "South");
@@ -147,9 +139,9 @@ public final class SudokuFrame extends JFrame {
         sPanel.newSudokuPuzzle(generatedPuzzle);
         sPanel.setFontSize(fontSize);
         buttonSelectionPanel.removeAll();
-        for (String value : generatedPuzzle.getValidValues()) {
+        for (String value : generatedPuzzle.getValidValues()) {             //To generate button seletion based on the chosen grid
             JButton b = new JButton(value);
-            b.setPreferredSize(new Dimension(50, 30));                                 //Button Selection Size
+            b.setPreferredSize(new Dimension(50, 30));                                 
             b.addActionListener(sPanel.new NumActionListener());
             buttonSelectionPanel.add(b);
         }
@@ -169,7 +161,7 @@ public final class SudokuFrame extends JFrame {
         }
 
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e) {        //Listener to repaint the chosen grid
             rebuildInterface(puzzleType, fontSize);
 
             counter = 0;
@@ -183,7 +175,7 @@ public final class SudokuFrame extends JFrame {
     private String TimeFormat(int count) {
 
         int hours = count / 3600;
-        int minutes = (count - hours * 3600) / 60;
+        int minutes = (count - hours * 3600) / 60;          //Time format 
         int seconds = count - minutes * 60;
 
         return String.format("Timer :" + "%02d", hours) + " : " + String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
@@ -194,7 +186,8 @@ public final class SudokuFrame extends JFrame {
             @Override
             public void run() {
                 SudokuFrame frame = new SudokuFrame();
-                frame.setVisible(true);
+                frame.setVisible(true);     //To make the JFrame visible
+                frame.timer.start();        //Timer will automatically start when the program runs 
             }
         });
     }

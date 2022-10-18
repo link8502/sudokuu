@@ -14,7 +14,7 @@ public class SudokuGenerator {
 		
 		Random randomGenerator = new Random();
 		
-		List<String> notUsedValidValues =  new ArrayList<String>(Arrays.asList(copy.getValidValues()));
+		List<String> notUsedValidValues =  new ArrayList<String>(Arrays.asList(copy.getValidValues()));             //To generate Random numbers 
 		for(int r = 0;r < copy.getNumRows();r++) {
 			int randomValue = randomGenerator.nextInt(notUsedValidValues.size());
 			copy.makeMove(r, 0, notUsedValidValues.get(randomValue), true);
@@ -24,7 +24,7 @@ public class SudokuGenerator {
 		
 		backtrackSudokuSolver(0, 0, copy);
 		
-		int numberOfValuesToKeep = (int)(0.22222*(copy.getNumRows()*copy.getNumRows()));
+		int numberOfValuesToKeep = (int)(0.66874*(copy.getNumRows()*copy.getNumRows()));        //To adjust the number of the generated numbers
 		
 		for(int i = 0;i < numberOfValuesToKeep;) {
 			int randomRow = randomGenerator.nextInt(puzzle.getNumRows());

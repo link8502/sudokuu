@@ -93,7 +93,7 @@ public class SudokuPanel extends JPanel {
         
         
 
-        Font f = new Font("Times New Roman", Font.PLAIN, fontSize);
+        Font f = new Font("Times New Roman", Font.BOLD, fontSize);      //font of the random generated numbers
         g2d.setFont(f);
         FontRenderContext fContext = g2d.getFontRenderContext();
         for (int row = 0; row < puzzle.getNumRows(); row++) {
@@ -106,7 +106,7 @@ public class SudokuPanel extends JPanel {
             }
         }
         if (currentlySelectedCol != -1 && currentlySelectedRow != -1) {
-            g2d.setColor(new Color(0.0f, 0.0f, 1.0f, 0.3f));
+            g2d.setColor(new Color(0.0f, 0.0f, 1.0f, 0.3f));            //Color of the cell if clicked with mouse BUTTON1
             g2d.fillRect(currentlySelectedCol * slotWidth, currentlySelectedRow * slotHeight, slotWidth, slotHeight);
         }
     }
