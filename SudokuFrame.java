@@ -76,13 +76,13 @@ public final class SudokuFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                Object [] options = {"Exit", "New Game"};
-                int x = JOptionPane.showOptionDialog(null, "Exit the Game or Want A New Game", "Finish", JOptionPane.DEFAULT_OPTION,JOptionPane.ERROR_MESSAGE, null, options, options[0]);
+                Object [] options = {"No","YES"};
+                int x = JOptionPane.showOptionDialog(null, "Want A New Game ?", "Finish", JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
                 
                 if(x == 1){
                 SudokuFrame.this.rebuildInterface(SudokuPuzzleType.NINEBYNINE, 26);
             }else{
-                SudokuFrame.this.dispose(); 
+                SudokuFrame.this.dispose();
                 }
                 
             }
